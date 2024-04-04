@@ -1,0 +1,15 @@
+/* Homepage.css */
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 11.3%;
+    margin-top: 2%;
+  }
+  
+  .select-container {
+    margin-left: 5%; 
+    margin-right: 2%;
+  }
+  

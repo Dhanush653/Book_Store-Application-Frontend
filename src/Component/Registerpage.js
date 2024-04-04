@@ -14,12 +14,6 @@ const Registerpage = () => {
     dobDay: '',
     dobMonth: '',
     dobYear: '',
-    // registeredDay: '',
-    // registeredMonth: '',
-    // registeredYear: '',
-    // updatedDay: '',
-    // updatedMonth: '',
-    // updatedYear: '',
     password: ''
   });
 
@@ -125,94 +119,6 @@ const Registerpage = () => {
                 ))}
               </Select>
             </Box>
-            {/* <Box display='flex' alignItems='center' marginLeft={10} marginTop={4}>
-              <Typography variant='subtitle1' marginRight={10.5}>
-                Registered Date
-              </Typography>
-              <Select
-                variant='outlined'
-                size='small'
-                name="registeredDay"
-                value={formValue.registeredDay}
-                onChange={handleChange}
-                sx={{ width: '70px', marginLeft: '20px' }}
-              >
-                <MenuItem value=''>Day</MenuItem>
-                {[...Array(31)].map((_, index) => (
-                  <MenuItem key={index + 1} value={(index + 1).toString()}>{index + 1}</MenuItem>
-                ))}
-              </Select>
-              <Select
-                variant='outlined'
-                size='small'
-                name="registeredMonth"
-                value={formValue.registeredMonth}
-                onChange={handleChange}
-                sx={{ width: '70px', marginLeft: '20px' }}
-              >
-                <MenuItem value=''>Month</MenuItem>
-                {[...Array(12)].map((_, index) => (
-                  <MenuItem key={index + 1} value={(index + 1).toString()}>{index + 1}</MenuItem>
-                ))}
-              </Select>
-              <Select
-                variant='outlined'
-                size='small'
-                name="registeredYear"
-                value={formValue.registeredYear}
-                onChange={handleChange}
-                sx={{ width: '85px', marginLeft: '20px' }}
-              >
-                <MenuItem value=''>Year</MenuItem>
-                {[...Array(50)].map((_, index) => (
-                  <MenuItem key={index + 1970} value={(index + 1970).toString()}>{index + 1970}</MenuItem>
-                ))}
-              </Select>
-            </Box>
-            <Box display='flex' alignItems='center' marginLeft={10} marginTop={4}>
-              <Typography variant='subtitle1' marginRight={12.5}>
-                Updated Date
-              </Typography>
-              <Select
-                variant='outlined'
-                size='small'
-                name="updatedDay"
-                value={formValue.updatedDay}
-                onChange={handleChange}
-                sx={{ width: '70px', marginLeft: '20px' }}
-              >
-                <MenuItem value=''>Day</MenuItem>
-                {[...Array(31)].map((_, index) => (
-                  <MenuItem key={index + 1} value={(index + 1).toString()}>{index + 1}</MenuItem>
-                ))}
-              </Select>
-              <Select
-                variant='outlined'
-                size='small'
-                name="updatedMonth"
-                value={formValue.updatedMonth}
-                onChange={handleChange}
-                sx={{ width: '70px', marginLeft: '20px' }}
-              >
-                <MenuItem value=''>Month</MenuItem>
-                {[...Array(12)].map((_, index) => (
-                  <MenuItem key={index + 1} value={(index + 1).toString()}>{index + 1}</MenuItem>
-                ))}
-              </Select>
-              <Select
-                variant='outlined'
-                size='small'
-                name="updatedYear"
-                value={formValue.updatedYear}
-                onChange={handleChange}
-                sx={{ width: '85px', marginLeft: '20px' }}
-              >
-                <MenuItem value=''>Year</MenuItem>
-                {[...Array(50)].map((_, index) => (
-                  <MenuItem key={index + 1970} value={(index + 1970).toString()}>{index + 1970}</MenuItem>
-                ))}
-              </Select>
-            </Box> */}
             <Box display='flex' alignItems='center' marginLeft={10} marginTop={4} marginBottom={5}>
               <Typography variant='subtitle1'>
                 Password
@@ -224,7 +130,6 @@ const Registerpage = () => {
               Submit
             </Button>
           </Box>
-
           </Box>
         </Box>
       </Box>
@@ -233,4 +138,3 @@ const Registerpage = () => {
 };
 
 export default Registerpage;
-
