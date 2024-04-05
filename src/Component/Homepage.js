@@ -1,54 +1,107 @@
-// import React from 'react'
-// import Header from './Header';
-// import { Typography } from '@mui/material';
-// import './Homepage.css';
-
-// const Homepage = () => {
-//   return (
-//     <div>
-//       <Header />
-//       <div className='top' style={{ overflow: 'visible' }}>  {/* Added style attribute */}
-//         <div>
-//           <Typography variant='h5' marginLeft='11.3%' marginTop='2%'>
-//             Books
-//           </Typography>
-//         </div>
-//         <select name="sort" id="sort">
-//           <option value="">Sort Items</option>
-//         <option value="lowtohigh">Price: Lowest To Higest</option>
-//         <option value="hightolow">Price: Higest To Lowest</option>
-//         </select>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Homepage
 import React from 'react';
 import Header from './Header';
 import { Typography } from '@mui/material';
 import './Homepage.css';
+import axios from 'axios';
+import { useState, useEffect } from "react";
+// import Grid from './Grid';
 
 const Homepage = () => {
+  const [bookData, setBookData] = useState([]);
+
+  useEffect(() => {
+    getBookData();
+  }, []);
+
+  const getBookData = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/books');
+      setBookData(response.data);
+      console.log(response)
+      console.log(bookData.values)
+    } catch (error) {
+      console.error('Error fetching book data:', error);
+    }
+  };
+
+  const addToCart = async (book_id, price) => {
+    try {
+      const cartUserData = {
+        book_quantity: 1,
+        book_price: price,
+        book_id: book_id,
+        user_id: 1
+      };
+
+      const response = await axios.post('http://localhost:8080/cart/add', cartUserData);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  }
+
   return (
-    <div>
+    <div className='container'>
       <Header />
       <div className='top'>
-        <div>
+        <div className='book'>
           <Typography variant='h5'>
             Books
           </Typography>
         </div>
         <div className='select-container'>
           <select name="sort" id="sort">
-            <option value="">Sort Items</option>
+            <option value="">Sort by revelance</option>
             <option value="lowtohigh">Price: Lowest To Highest</option>
             <option value="hightolow">Price: Highest To Lowest</option>
           </select>
         </div>
       </div>
+      
+
+
+      <div style={{ paddingLeft: '11rem', paddingRight: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '2rem' }}>
+          {bookData.map(item => (
+            <div key={item.book_id} style={{ boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)', borderRadius: '3px', background: '#ffffff' }}>
+              <div style={{ backgroundColor: '#f5f5f5', height: '55%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <img
+                  src={`./Asserts/${item.book_logo}`}
+                  alt="Book Cover"
+                  id="book"
+                  style={{ marginLeft: '25%', marginRight: '25%', height: '75%',objectFit: 'cover', cursor: 'pointer', transition: 'transform 0.5s' }}
+                  // onMouseOver={e => e.target.style.transform = 'scale(1.1)'}
+                  // onMouseOut={e => e.target.style.transform = 'scale(1)'}
+                />
+              </div>
+              <div style={{ padding: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection:'column' }}>
+                  <h3 style={{ fontWeight: '400', fontSize: 'large',margin:'2px', padding:'2px' }}>{item.book_name}</h3>
+                  <h5 style={{ fontWeight: '500', color: '#333333',margin:'2px', padding:'2px' }}>{item.book_author}</h5>
+                </div>
+                <p style={{ color: '#666666' }}>{item.book_description}</p>
+                <p style={{ color: '#666666' }}>
+                  <span style={{ fontWeight: 'bold' }}>Rs. {item.book_price}</span>
+                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <button onClick={() => addToCart(item.book_id, item.book_price)} style={{ backgroundColor: '#a03037', color: 'white', borderRadius: '2px', width: '45%', cursor: 'pointer' }}>
+                    Add TO BAG
+                  </button>
+                  <button className="wishlistButton" style={{ backgroundColor: 'white', border: '1px solid black', borderRadius: '2px', width: '45%', cursor: 'pointer' }}>
+                    WISHLIST
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+
+
     </div>
   );
 };
-
 export default Homepage;

@@ -1,5 +1,7 @@
 /* Homepage.css */
-
+.book{
+  margin-left: 3%;
+}
 .top {
     display: flex;
     align-items: center;
@@ -8,8 +10,12 @@
     margin-top: 2%;
   }
   
-  .select-container {
+.select-container {
     margin-left: 5%; 
-    margin-right: 2%;
+    margin-right: 10.5%;
   }
+#sort{
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
   

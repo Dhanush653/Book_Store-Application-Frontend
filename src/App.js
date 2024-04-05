@@ -4,6 +4,7 @@ from 'react-router-dom';
 import Loginpage from './Component/Loginpage';
 import Registerpage from './Component/Registerpage';
 import Homepage from './Component/Homepage';
+import Cart from './Component/Cart';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path = '/' element = {<Loginpage/>}/>   
         <Route path = '/register' element = {<Registerpage/>}/>
         <Route path='/home' element = {<Homepage/>}/> 
+        <Route path='/cart' element = {<Cart/>}/>
       </Routes>
     </div>
     </BrowserRouter>
