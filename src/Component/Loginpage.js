@@ -128,6 +128,8 @@
 // };
 
 // export default Loginpage;
+
+
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -158,48 +160,41 @@ const Loginpage = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await BookService.loginUser({
-        email: formData.username,
-        user_password: formData.password
-      });
-  
-      if (response && response.data) {
-        console.log(response.data);
-        if (response.data === 'Invalid Login. Try Again') {
-          setError("Invalid credentials");
+        const response = await BookService.loginUser({
+            email: formData.username,
+            user_password: formData.password
+        });
+
+        if (response && response.data) {
+            console.log(response.data);
+            if (response.data === 'Invalid Login. Try Again') {
+                setError("Invalid credentials");
+            } else {
+                localStorage.setItem('token', response.data);
+                console.log(response.data);
+
+                const userDetailsResponse = await BookService.generateUserByToken(response.data);
+                console.log("User Details Response:", userDetailsResponse); // Print the response from generateUserByToken
+                if (userDetailsResponse && userDetailsResponse.data && userDetailsResponse.data.length > 0) {
+                    const user = userDetailsResponse.data[0];
+                    const userId = user.user_id;
+                    console.log("User ID:", userId);
+                    // navigate(`/home/${userId}`);
+                    navigate(`/${userId}`);
+                } else {
+                    console.error('User ID not found in response:', userDetailsResponse);
+                    setError("Failed to retrieve user details");
+                }
+            }
         } else {
-          // Extract token from response
-          const token = String(response.data);
-  
-          // Store token in local storage
-          localStorage.setItem('token', token);
-          console.log(token)
-  
-          // Retrieve user details using the stored token
-          const userDetailsResponse = await BookService.generateUserByToken(token);
-          if (userDetailsResponse && userDetailsResponse.data) { 
-            // Extract user ID from user details response
-            const userId = userDetailsResponse.data.user_id;
-            console.log(userId);
-  
-            // Redirect to home page with user ID appended to URL
-            navigate(`/home/${userId}`);
-          } else {
-            console.error('Failed to retrieve user details:', userDetailsResponse);
-            setError("Failed to retrieve user details");
-          }
+            console.error('Login failed:', response);
+            setError("Invalid credentials");
         }
-      } else {
-        console.error('Login failed:', response);
-        setError("Invalid credentials");
-      }
     } catch (error) {
-      console.error('Login failed:', error);
-      setError("Invalid credentials");
+        console.error('Login failed:', error);
+        setError("Invalid credentials");
     }
-  };
-
-
+};
   return (
     <>
       <Box sx={{ backgroundColor: '#F0F0F0', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -221,6 +216,8 @@ const Loginpage = () => {
           marginTop={20}
           display="flex"
           flexDirection="column"
+          borderRadius={2}
+          borderColor={'grey'}
           p={2}
           sx={{ backgroundColor: 'white', border: '1px solid grey', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
           <Box sx={{ marginBottom: 'auto' }}>

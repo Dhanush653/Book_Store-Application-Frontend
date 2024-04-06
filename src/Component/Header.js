@@ -85,7 +85,7 @@ export default function PrimarySearchAppBar() {
             </Search>
                 <Box sx={{ flexGrow: 1 }} />
                 <IconButton size="large" aria-label="show cart" color="inherit" sx={{ marginRight: 20 }}>
-                  <Link to="/cart" style={{ textDecoration: 'none', color: 'inherit' }}> {/* Link to Cart.js */}
+                  <Link to="/carto" style={{ textDecoration: 'none', color: 'inherit' }}> 
                     <Badge badgeContent={4} color="error">
                       <Typography variant='body1' sx={{marginRight: 1, fontSize: 'small' }}>Cart</Typography>
                       <ShoppingCartOutlinedIcon />

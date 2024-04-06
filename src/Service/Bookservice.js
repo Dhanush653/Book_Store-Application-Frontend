@@ -29,14 +29,14 @@ class Bookservice {
     generateUserByToken(token) {
         return axios.get("http://localhost:8080/user/details", {
             headers: {
-                'Authorization': `Bearer ${String(token)}`
+                'token': token
             }
         });
     }
-    
 }
 
-const bookServiceInstance = new Bookservice(); // Assign instance to a variable
+const bookServiceInstance = new Bookservice();
 
-export default bookServiceInstance; // Export the instance as the default module
+export default bookServiceInstance;
+
 

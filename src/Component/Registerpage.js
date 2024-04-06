@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { TextField, Button } from '@mui/material';
 import BookService from '../Service/Bookservice'
+import {Link} from 'react-router-dom';
 
 const Registerpage = () => {
   const [formValue, setFormValue] = useState({
@@ -100,7 +101,7 @@ const Registerpage = () => {
                 name="dob"
                 value={formValue.dob}
                 onChange={handleChange}
-                style={{ marginLeft: '20px', padding: '5px 10px', width: 'auto', height: '35px' }}
+                style={{ marginLeft: '128px', padding: '1px 30px', width: 'auto', height: '30px' }}
               />
             </Box>
             <Box display='flex' alignItems='center' marginLeft={10} marginTop={4} marginBottom={5}>
@@ -109,8 +110,13 @@ const Registerpage = () => {
               </Typography>
               <TextField name="password" variant='outlined' size='small' placeholder='Password...' sx={{ marginLeft: '150px', '& input': { padding: '5px 35px' } }} onChange={handleChange} />
             </Box>
-            <Box display="flex" justifyContent="center" marginBottom={4} >
-              <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Box display="flex" marginBottom={4} marginTop={2} marginLeft={10} >
+            <Link to="/">
+            <Button variant='contained' color='error' sx={{justifyContent:'left', marginLeft:'15%'}}>
+                Back
+            </Button>
+            </Link>  
+              <Button variant="contained" color="primary" onClick={handleSubmit} sx={{justifyContent:'right', marginLeft:'53%'}}>
                 Submit
               </Button>
             </Box>
