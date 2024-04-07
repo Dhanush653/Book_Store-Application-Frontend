@@ -1,7 +1,11 @@
 import React from 'react';
-import Header from './Header'
+import { useParams } from 'react-router-dom';
+import Header from './Header';
+import order from '../Asserts/order.png'
 
 const Orders = () => {
+  const { userId, address } = useParams(); 
+
   return (
     <div style={{ minHeight: '100vh' }}>
       <Header/>
@@ -9,7 +13,7 @@ const Orders = () => {
         <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img
             className="img"
-            src="./Asserts/order.png"
+            src={order}
             alt="order"
             style={{ width: '100%', height: '40vh' }}
           />
@@ -37,8 +41,7 @@ const Orders = () => {
               <td style={{ border: '1px solid #e2e2e2', padding: '18px' }}>admin@bookstore.com</td>
               <td style={{ border: '1px solid #e2e2e2', padding: '18px' }}>+91 8163475881</td>
               <td style={{ border: '1px solid #e2e2e2', padding: '18px' }}>
-                42, 14th Main, 15th Cross, Sector 4 ,opp to BDA complex, near
-                Kumarakom restaurant, HSR Layout, Bangalore 560034
+                {address} 
               </td>
             </tr>
           </tbody>
@@ -46,8 +49,8 @@ const Orders = () => {
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3rem' }}>
         <div>
-          <a href="/homepage">
-            <button style={{ backgroundColor: '#3371b5', borderRadius: '3px', color: '#fff', padding: '0.5rem 1rem', border: 'none', cursor: 'pointer' }}>
+          <a href={`/${userId}`}> 
+            <button style={{ backgroundColor: '#3371b5', borderRadius: '3px', color: '#fff', padding: '0.5rem 1rem', border: 'none', cursor: 'pointer', marginBottom:'10px' }}>
               CONTINUE SHOPPING
             </button>
           </a>
@@ -58,5 +61,3 @@ const Orders = () => {
 };
 
 export default Orders;
-
-

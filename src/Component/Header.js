@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link, useParams  } from 'react-router-dom'; 
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -52,6 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const { userId } = useParams();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#A03037' }}>
@@ -85,13 +86,14 @@ export default function PrimarySearchAppBar() {
             </Search>
                 <Box sx={{ flexGrow: 1 }} />
                 <IconButton size="large" aria-label="show cart" color="inherit" sx={{ marginRight: 20 }}>
-                  <Link to="/carto" style={{ textDecoration: 'none', color: 'inherit' }}> 
-                    <Badge badgeContent={4} color="error">
-                      <Typography variant='body1' sx={{marginRight: 1, fontSize: 'small' }}>Cart</Typography>
-                      <ShoppingCartOutlinedIcon />
-                    </Badge>
+                  <Link to={`/carto/${userId}`} style={{ textDecoration: 'none', color: 'inherit' }}> 
+                  <Badge badgeContent={4} color="error">
+                  <Typography variant='body1' sx={{marginRight: 1, fontSize: 'small' }}>Cart</Typography>
+                  <ShoppingCartOutlinedIcon />
+                  </Badge>
                   </Link>
                 </IconButton>
+
             </Toolbar>
       </AppBar>
     </Box>

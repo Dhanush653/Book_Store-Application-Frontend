@@ -71,7 +71,7 @@ const Homepage = () => {
           {bookData.map(item => (
             <div key={item.book_id} style={{ boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)', borderRadius: '3px', background: '#ffffff', maxHeight: '90%', maxWidth: '100%' }}>
               <div style={{ backgroundColor: '#f5f5f5', height: '55%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              {console.log(`./Asserts/${item.book_logo}`)}
+              
                 <img
                   src={`./Asserts/${item.book_logo}`}
                   alt="Book Cover"
@@ -89,7 +89,7 @@ const Homepage = () => {
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {buttonClicked[item.book_id] ? (
-                    <Link to="/cart">
+                    <Link to="/carto/:userId">
                     <button style={{backgroundColor:'blue', color: 'white', borderRadius: '2px', width: '150%', cursor: 'pointer', padding: '7% 25%' }}>
                       Go To Cart
                     </button>
