@@ -3,12 +3,13 @@ import Header from './Header';
 import { Typography } from '@mui/material';
 import './Homepage.css';
 import axios from 'axios';
-import {Link, useLocation } from 'react-router-dom';
+import {Link, useLocation, useParams } from 'react-router-dom';
 
 const Homepage = () => {
   const [bookData, setBookData] = useState([]);
   const [buttonClicked, setButtonClicked] = useState({});
   const location = useLocation();
+  const { userId } = useParams();
 
   useEffect(() => {
     getBookData();
@@ -34,7 +35,6 @@ const Homepage = () => {
 
       const response = await axios.post('http://localhost:8080/cart/add', cartUserData);
       console.log(response.data);
-      // Set button status to 'clicked'
       setButtonClicked(prevState => ({
         ...prevState,
         [book_id]: true
@@ -45,7 +45,7 @@ const Homepage = () => {
   };
   const getUserIdFromUrl = () => {
     const parts = location.pathname.split('/');
-    return parts[parts.length - 1]; // Get the last part of the URL (user ID)
+    return parts[parts.length - 1];
   };
 
   return (
@@ -89,7 +89,7 @@ const Homepage = () => {
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {buttonClicked[item.book_id] ? (
-                    <Link to="/carto/:userId">
+                    <Link to={`/carto/${userId}`}>
                     <button style={{backgroundColor:'blue', color: 'white', borderRadius: '2px', width: '150%', cursor: 'pointer', padding: '7% 25%' }}>
                       Go To Cart
                     </button>

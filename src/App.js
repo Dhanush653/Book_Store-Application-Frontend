@@ -5,6 +5,7 @@ import Registerpage from './Component/Registerpage';
 import Homepage from './Component/Homepage';
 import Order from './Component/order';
 import Carto from './Component/Carto';
+import Frogotpassword from './Component/Frogotpassword';
 
 function App() {
   return (
@@ -13,10 +14,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Loginpage />} />
           <Route path="/register" element={<Registerpage />} />
-          <Route path="/home" element={<Homepage />} />
           <Route path="/:userId" element={<Homepage />} /> 
           <Route path="/orders/:userId/:address" element={<Order />} />
           <Route path="/carto/:userId" element={<Carto />} />
+          <Route path="/forgot" element={<Frogotpassword/>}/>
         </Routes>
       </div>
     </Router>

@@ -28,6 +28,18 @@ class Bookservice {
     placeOrder(orderDTO) {
         return axios.post("http://localhost:8080/order/orderplace", orderDTO);
     }
+
+    forgetPassword(email) {
+        return axios.post("http://localhost:8080/user/forget", { user_email: email } );
+      }
+
+    changePassword(change) {
+        return axios.post("http://localhost:8080/user/change", change);
+    }
+    
+    updateQuantity(cartId, quantity) {
+        return axios.put(`http://localhost:8080/cart/updateQuantity/${cartId}/${quantity}`);
+    }
 }
 
 const bookServiceInstance = new Bookservice();

@@ -93,7 +93,6 @@ export default function PrimarySearchAppBar() {
                   </Badge>
                   </Link>
                 </IconButton>
-
             </Toolbar>
       </AppBar>
     </Box>

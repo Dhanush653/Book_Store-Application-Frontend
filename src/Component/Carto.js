@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from './Header';
 import { Typography, Button, TextField, Radio, RadioGroup, FormControlLabel } from '@mui/material';
-import Bookservice from '../Service/Bookservice'; // Import the Bookservice instance
-
+import Bookservice from '../Service/Bookservice'; 
 const Carto = () => {
   const { userId } = useParams();
   const [cartItems, setCartItems] = useState([]);
   const [showCustomerDetails, setShowCustomerDetails] = useState(false);
-  const [address, setAddress] = useState(''); // State for storing address
-  const [showOrderSummary, setShowOrderSummary] = useState(false); // State for showing order summary
+  const [address, setAddress] = useState(''); 
+  const [showOrderSummary, setShowOrderSummary] = useState(false); 
 
   useEffect(() => {
     fetchCartItems(userId);
@@ -55,6 +54,18 @@ const Carto = () => {
       });
   };
 
+  const handleQuantityChange = (event, cartId) => {
+    const newQuantity = event.target.value;
+    Bookservice.updateQuantity(cartId, newQuantity)
+      .then(response => {
+        console.log('Quantity updated successfully:', response.data);
+        fetchCartItems(userId);
+      })
+      .catch(error => {
+        console.error('Error updating quantity:', error);
+      });
+  };
+
   return (
     <div className='container'>
       <Header />
@@ -87,6 +98,19 @@ const Carto = () => {
                       <Typography variant="h6" marginLeft={17} marginTop={-17} fontSize='16px'>{item.book.book_name}</Typography>
                       <Typography variant="subtitle1" marginLeft={17} fontSize='12px' color='#9D9D9D'>Author: {item.book.book_author}</Typography>
                       <Typography variant="subtitle1" marginLeft={17} fontSize='17px' >Rs. {item.book_price}</Typography>
+                      <div style={{ display: 'flex', alignItems: 'center', marginTop:'35px' }}>
+                        <Typography variant="subtitle1" style={{ marginRight: '10px', marginLeft:'135px' ,color:'#9D9D9D',fontSize:'12px' }}>Quantity:</Typography>
+                        <TextField
+                        type='number'
+                        defaultValue={1}
+                        value={item.quantity}
+                        onChange={(e) => handleQuantityChange(e, item.cart_id)}
+                        style={{ width:'60px', marginTop:'5px'}}
+                        InputProps={{
+                        style: { height: '25px' } 
+                        }}
+                        />
+                      </div>
                     </div>
                   </div>
                 )}
@@ -94,7 +118,7 @@ const Carto = () => {
             ))}
           </div>
         )}
-        <Button variant="contained" color="primary" style={{ marginTop: '20px', marginLeft: 'auto', display: 'block' }} onClick={handlePlaceOrder}>Place Order</Button>
+        <Button variant="contained" color="primary" style={{ marginTop: '10px', marginLeft: 'auto', display: 'block' }} onClick={handlePlaceOrder}>Place Order</Button>
       </div>
 
       {showCustomerDetails && (
@@ -150,4 +174,3 @@ const Carto = () => {
 };
 
 export default Carto;
-
