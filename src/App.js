@@ -6,6 +6,7 @@ import Homepage from './Component/Homepage';
 import Order from './Component/order';
 import Carto from './Component/Carto';
 import Frogotpassword from './Component/Frogotpassword';
+import ResetPassword from './Component/ResetPassword';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/orders/:userId/:address" element={<Order />} />
           <Route path="/carto/:userId" element={<Carto />} />
           <Route path="/forgot" element={<Frogotpassword/>}/>
+          <Route path='/reset' element={<ResetPassword/>}/>
         </Routes>
       </div>
     </Router>

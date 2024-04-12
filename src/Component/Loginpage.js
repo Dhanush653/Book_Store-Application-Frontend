@@ -132,8 +132,8 @@ const Loginpage = () => {
               Login
             </Button>
           </Box>
-          <Box display="flex" justifyContent="left" marginBottom={4} marginLeft={2} marginTop={-1} color={'grey'}>
-            Don't have a Account : 
+          <Box display="flex" justifyContent="left" marginBottom={4} marginLeft={2} marginTop={-1} color={'grey'} >
+            <span style={{fontStyle:'italic'}}> Don't have a Account : </span>
             <Link component={RouterLink} to="/register" color="primary" underline="none">
               Create new Account
             </Link>

@@ -40,6 +40,18 @@ class Bookservice {
     updateQuantity(cartId, quantity) {
         return axios.put(`http://localhost:8080/cart/updateQuantity/${cartId}/${quantity}`);
     }
+
+    resetPassword(resetData) {
+        return axios.post("http://localhost:8080/user/reset", resetData);
+    }
+
+    deleteCartItemsByUserId(userId) {
+        return axios.delete(`http://localhost:8080/cart/removeByUser/${userId}`);
+    }
+
+    deleteCartItem(cartId) {
+        return axios.delete(`http://localhost:8080/cart/remove/${cartId}`);
+    }
 }
 
 const bookServiceInstance = new Bookservice();

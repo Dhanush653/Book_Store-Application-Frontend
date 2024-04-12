@@ -11,6 +11,7 @@ import Badge from '@mui/material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import book from '../Asserts/book.png';
+import Dropdown from './Dropdown';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -85,14 +86,15 @@ export default function PrimarySearchAppBar() {
                     />
             </Search>
                 <Box sx={{ flexGrow: 1 }} />
-                <IconButton size="large" aria-label="show cart" color="inherit" sx={{ marginRight: 20 }}>
+                <IconButton size="large" aria-label="show cart" color="inherit" sx={{ marginRight: 5 }}>
                   <Link to={`/carto/${userId}`} style={{ textDecoration: 'none', color: 'inherit' }}> 
-                  <Badge badgeContent={4} color="error">
+                  <Badge color="error">
                   <Typography variant='body1' sx={{marginRight: 1, fontSize: 'small' }}>Cart</Typography>
                   <ShoppingCartOutlinedIcon />
                   </Badge>
                   </Link>
                 </IconButton>
+                <Dropdown userId={userId} />
             </Toolbar>
       </AppBar>
     </Box>
