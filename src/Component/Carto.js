@@ -40,7 +40,7 @@ const Carto = () => {
     setShowOrderSummary(true);
   };
 
-  const handleCheckout = () => {
+   const handleCheckout = () => {
     const orderDTO = {
       cart_id: cartItems.length > 0 ? cartItems[0].cart_id : null, 
       address: address 
@@ -56,6 +56,32 @@ const Carto = () => {
         console.error('Error placing order:', error);
       });
   };
+
+//   const handleCheckout = () => {
+//     const orderDTO = {
+//       cart_id: cartItems.length > 0 ? cartItems[0].cart_id : null, 
+//       address: address 
+//     };
+//     console.log('Sending to backend:', orderDTO); 
+  
+//     Bookservice.placeOrder(orderDTO)
+//       .then(response => {
+//         console.log('Order placed successfully:', response.data);
+//         const orderId = response.data.orderId;
+//         window.location.href = `/orders/${userId}/${orderId}`;
+//         return Bookservice.deleteOrderDetailsByCartId(orderDTO.cart_id);
+//       })
+//       .then(() => {
+//         return Bookservice.deleteCartItemsByUserId(userId);
+//       })
+//       .then(() => {
+//         console.log('All cart items and associated order details deleted successfully');
+//       })
+//       .catch(error => {
+//         console.error('Error placing order or deleting cart items:', error);
+//       });
+// };
+  
 
   const handleQuantityChange = (event, cartId) => {
     const newQuantity = event.target.value;
@@ -93,7 +119,6 @@ const Carto = () => {
 
   return (
     <div className='container'>
-      {/* <Header /> */}
       <AppBar position="static" sx={{ backgroundColor: '#A03037' }}>
           <Toolbar variant="dense">
             <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '150px', marginRight: 'auto', paddingBottom:'15px', paddingTop:'15px' }}>
@@ -154,7 +179,7 @@ const Carto = () => {
         )}
         {cartItems.length === 0 && (
           <Link to={`/${userId}`}>
-            <Button variant="contained" color="primary" style={{ marginTop: '10px', marginLeft: 'auto', display: 'block' }}>Add Items</Button>
+            <Button variant="contained" color="primary" style={{ marginTop: '10px', marginLeft: 'auto', display: 'block' }}>Go To Homepage</Button>
           </Link>
         )}
       </div>
@@ -203,8 +228,40 @@ const Carto = () => {
           <Button variant="contained" color="primary" style={{ marginLeft: 'auto', display: 'block' }} onClick={handleCheckout}>Checkout</Button>
         </div>
       )}
+
+{/* {showOrderSummary && (
+  <div style={{ margin: '20px 165px', padding: '20px', border: '1px solid #707070', maxWidth: '800px' }}>
+    <Typography variant='h5' marginBottom={6}>Order summary</Typography>
+    {cartItems.map((item, index) => (
+      <React.Fragment key={item.cart_id}>
+        {item.book && (
+          <div style={{ marginBottom: '80px', marginLeft: '20px' }}>
+            <img
+              src={`/Asserts/${item.book.book_logo.includes('/carto/') ? item.book.book_logo.replace('/carto/', '') : item.book.book_logo}`}
+              alt={item.book.book_name}
+              style={{ width: '90px', height: 'auto', marginRight: '20px' }}
+            />
+            <div>
+              <Typography variant="h6" marginLeft={17} marginTop={-17} fontSize='16px'>{item.book.book_name}</Typography>
+              <Typography variant="subtitle1" marginLeft={17} fontSize='12px' color='#9D9D9D'>Author: {item.book.book_author}</Typography>
+              <Typography variant="subtitle1" marginLeft={17} fontSize='17px'>Rs. {item.book_price}</Typography>
+            </div>
+          </div>
+        )}
+      </React.Fragment>
+    ))}
+    
+    <Typography variant="subtitle1" style={{ marginTop: '20px' }}>Quantity: {cartItems.reduce((acc, curr) => acc + parseInt(curr.quantity), 0)}</Typography>
+    <Typography variant="subtitle1">Total: Rs. {cartItems.reduce((acc, curr) => acc + (parseInt(curr.book_price) * parseInt(curr.quantity)), 0)}</Typography>
+    <Button variant="contained" color="primary" style={{ marginLeft: 'auto', display: 'block', marginTop: '20px' }} onClick={handleCheckout}>Checkout</Button>
+  </div>
+)} */}
+
+
     </div>
   );
 };
 
 export default Carto;
+
+

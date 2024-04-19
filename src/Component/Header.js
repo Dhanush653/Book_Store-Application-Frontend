@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, useParams  } from 'react-router-dom'; 
+import { Link, useParams } from 'react-router-dom';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -52,50 +52,60 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ bookData, setFilteredBookData }) {
   const { userId } = useParams();
+
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value;
+    const filteredData = bookData.filter(item =>
+      item.book_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredBookData(filteredData);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#A03037' }}>
         <Toolbar>
-        <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="open drawer"
-        sx={{ mr: 2, marginLeft:15 } }
-        >
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2, marginLeft: 15 }}
+          >
             <img src={book} alt='book' className='bookicon' />
-            </IconButton>
-            <Typography
+          </IconButton>
+          <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft:-3 } }
-            >
+            sx={{ display: { xs: 'none', sm: 'block' }, marginLeft: -3 }}
+          >
             Bookstore
-            </Typography>
-            <Search sx={{backgroundColor: "white" }}>
-                    <SearchIconWrapper sx={{color: "#9D9D9D"}}>
-                        <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                    placeholder="Search…"
-                    inputProps={{ 'aria-label': 'search' }}
-                    sx={{color:"#9D9D9D" , paddingRight:30 } }
-                    />
-            </Search>
-                <Box sx={{ flexGrow: 1 }} />
-                <IconButton size="large" aria-label="show cart" color="inherit" sx={{ marginRight: 5 }}>
-                  <Link to={`/carto/${userId}`} style={{ textDecoration: 'none', color: 'inherit' }}> 
-                  <Badge color="error">
-                  <Typography variant='body1' sx={{marginRight: 1, fontSize: 'small' }}>Cart</Typography>
-                  <ShoppingCartOutlinedIcon />
-                  </Badge>
-                  </Link>
-                </IconButton>
-                <Dropdown userId={userId} />
-            </Toolbar>
+          </Typography>
+          <Search sx={{ backgroundColor: "white" }}>
+            <SearchIconWrapper sx={{ color: "#9D9D9D" }}>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              sx={{ color: "#9D9D9D", paddingRight: 30 }}
+              onChange={handleSearch}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1 }} />
+          <IconButton size="large" aria-label="show cart" color="inherit" sx={{ marginRight: 5 }}>
+            <Link to={`/carto/${userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Badge color="error">
+                <Typography variant='body1' sx={{ marginRight: 1, fontSize: 'small' }}>Cart</Typography>
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </Link>
+          </IconButton>
+          <Dropdown userId={userId} />
+        </Toolbar>
       </AppBar>
     </Box>
   );

@@ -1,14 +1,29 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Header from './Header';
+// import Header from './Header';
 import order from '../Asserts/order.png'
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import {Typography} from '@mui/material';
 
 const Orders = () => {
   const { userId, address } = useParams(); 
 
   return (
     <div style={{ minHeight: '100vh' }}>
-      <Header/>
+      {/* <Header/> */}
+      <AppBar position="static" sx={{ backgroundColor: '#A03037' }}>
+          <Toolbar variant="dense">
+            <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '150px', marginRight: 'auto', paddingBottom:'15px', paddingTop:'15px' }}>
+              <AutoStoriesIcon sx={{ marginRight: '4px' }} />
+              <Typography variant="h6" color="inherit" component="div">
+                BookStore
+              </Typography>
+            </Box>
+          </Toolbar>
+        </AppBar>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '2rem' }}>
         <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img
